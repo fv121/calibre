@@ -8,7 +8,6 @@ import os
 import re
 import shutil
 import sys
-from calibre_extensions import hunspell
 from collections import defaultdict, namedtuple
 from functools import partial
 from itertools import chain
@@ -165,6 +164,7 @@ def get_dictionary(locale, exact_match=False):
 
 
 def load_dictionary(dictionary):
+    from calibre_extensions import hunspell
 
     def fix_path(path):
         if isinstance(path, bytes):
@@ -455,8 +455,17 @@ def find_tests():
             self.assertIn('List', self.suggestions('Lis𝑘t'))
             machine = (os.uname()[4] or '').lower()
             if machine != 'aarch64':
-                # This fails on ARM64 for reasons I dont have the time/interest
+                # This fails on Linux ARM64 for reasons I dont have the time/interest
                 # to explore. Probably a bug in hunspell.
                 self.assertIn('one\u2010half', self.suggestions('oone\u2010half'))
 
     return unittest.TestLoader().loadTestsFromTestCase(TestDictionaries)
+
+
+def test():
+    from calibre.utils.run_tests import run_cli
+    run_cli(find_tests())
+
+
+if __name__ == '__main__':
+    test()

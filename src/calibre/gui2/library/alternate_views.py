@@ -1144,6 +1144,7 @@ class GridView(QListView):
                 pass
 
     def moveCursor(self, action, modifiers):
+        action = QAbstractItemView.CursorAction(action)
         index = QListView.moveCursor(self, action, modifiers)
         if action in (QAbstractItemView.CursorAction.MoveLeft, QAbstractItemView.CursorAction.MoveRight) and index.isValid():
             ci = self.currentIndex()

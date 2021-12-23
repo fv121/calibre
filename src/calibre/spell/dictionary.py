@@ -453,7 +453,7 @@ def find_tests():
             self.assertIn('adequately', self.suggestions('ade-quately'))
             self.assertIn('magic. Wand', self.suggestions('magic.wand'))
             self.assertIn('List', self.suggestions('Lis𝑘t'))
-            machine = (os.uname()[4] or '').lower()
+            machine = (os.uname()[4] or '').lower() if hasattr(os, 'uname') else ''
             if machine != 'aarch64':
                 # This fails on Linux ARM64 for reasons I dont have the time/interest
                 # to explore. Probably a bug in hunspell.

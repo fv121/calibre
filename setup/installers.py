@@ -104,7 +104,8 @@ def build_dep(args):
 
 class BuildInstaller(Command):
 
-    OS = BITNESS = ''
+    OS = ''
+    BITNESS = '64'
 
     def add_options(self, parser):
         parser.add_option(
@@ -149,7 +150,7 @@ class BuildInstaller(Command):
 class BuildInstallers(BuildInstaller):
 
     OS = ''
-    ALL_ARCHES = '64', '32'
+    ALL_ARCHES = '64'
 
     def run(self, opts):
         for bitness in self.ALL_ARCHES:
@@ -157,15 +158,8 @@ class BuildInstallers(BuildInstaller):
             build_single(self.OS, bitness, shutdown)
 
 
-class Linux32(BuildInstaller):
-    OS = 'linux'
-    BITNESS = '32'
-    description = 'Build the 32-bit Linux calibre installer'
-
-
 class Linux64(BuildInstaller):
     OS = 'linux'
-    BITNESS = '64'
     description = 'Build the 64-bit Linux calibre installer'
 
 
@@ -175,15 +169,8 @@ class LinuxArm64(BuildInstaller):
     description = 'Build the 64-bit ARM Linux calibre installer'
 
 
-class Win32(BuildInstaller):
-    OS = 'windows'
-    BITNESS = '32'
-    description = 'Build the 32-bit windows calibre installers'
-
-
 class Win64(BuildInstaller):
     OS = 'windows'
-    BITNESS = '64'
     description = 'Build the 64-bit windows calibre installer'
 
 
@@ -193,7 +180,7 @@ class OSX(BuildInstaller):
 
 class Linux(BuildInstallers):
     OS = 'linux'
-    ALL_ARCHES = '64', '32', 'arm64'
+    ALL_ARCHES = '64', 'arm64'
 
 
 class Win(BuildInstallers):

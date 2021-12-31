@@ -150,7 +150,7 @@ class BuildInstaller(Command):
 class BuildInstallers(BuildInstaller):
 
     OS = ''
-    ALL_ARCHES = '64'
+    ALL_ARCHES = '64',
 
     def run(self, opts):
         for bitness in self.ALL_ARCHES:

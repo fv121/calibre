@@ -105,7 +105,7 @@ def build_dep(args):
 class BuildInstaller(Command):
 
     OS = ''
-    BITNESS = '64'
+    BITNESS = ''
 
     def add_options(self, parser):
         parser.add_option(
@@ -160,6 +160,7 @@ class BuildInstallers(BuildInstaller):
 
 class Linux64(BuildInstaller):
     OS = 'linux'
+    BITNESS = '64'
     description = 'Build the 64-bit Linux calibre installer'
 
 
@@ -171,6 +172,7 @@ class LinuxArm64(BuildInstaller):
 
 class Win64(BuildInstaller):
     OS = 'windows'
+    BITNESS = '64'
     description = 'Build the 64-bit windows calibre installer'
 
 
